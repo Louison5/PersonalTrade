@@ -16,11 +16,11 @@ _base_ = [
 
 data = dict(
     type = "PortfolioManagementDataset",
-    data_path = "data/portfolio_management/dj30",
-    train_path = "data/portfolio_management/dj30/train.csv",
-    valid_path = "data/portfolio_management/dj30/valid.csv",
-    test_path = "data/portfolio_management/dj30/test.csv",
-    test_dynamic_path='data/portfolio_management/dj30/DJI_label_by_DJIindex_3_24_-0.25_0.25.csv',
+    data_path = "data/portfolio_management/sse500",
+    train_path = "data/portfolio_management/sse500/train.csv",
+    valid_path = "data/portfolio_management/sse500/valid.csv",
+    test_path = "data/portfolio_management/sse500/test.csv",
+    test_dynamic_path='data/portfolio_management/sse500/DJI_label_by_DJIindex_3_24_-0.25_0.25.csv',
     tech_indicator_list = [
         "high",
         "low",

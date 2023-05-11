@@ -54,9 +54,10 @@ class PortfolioManagementSARLEnvironment(Environments):
 
         ##############################################################
         from trademaster.nets import mLSTMClf
-        self.network_dict = torch.load(get_attr(pretrained, "sarl_encoder", None))
-        self.net = mLSTMClf(n_features = len(self.tech_indicator_list), layer_num = 1, n_hidden = 128, tic_number = len(self.tic_list)).cuda()
-        self.net.load_state_dict(self.network_dict)
+        # self.network_dict = torch.load(get_attr(pretrained, "sarl_encoder", None))
+        self.net = mLSTMClf(n_features = len(self.tech_indicator_list), layer_num = 1, n_hidden = 128, tic_number = len(self.tic_list))
+        # self.net = mLSTMClf(n_features = len(self.tech_indicator_list), layer_num = 1, n_hidden = 128, tic_number = len(self.tic_list)).cuda()
+        # self.net.load_state_dict(self.network_dict)
         ##############################################################
 
         self.action_space = spaces.Box(low=-5,
