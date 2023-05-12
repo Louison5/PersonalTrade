@@ -430,6 +430,7 @@ def MRL_F2B_args_converter(args):
 
     return output_args
 def plot(df,alg,color='darkcyan',save=False):
+    print(df)
     x = range(len(df))
     y=(df["total assets"].values-df["total assets"].values[0])/df["total assets"].values[0]
     plt.plot(x, y*100, color, label=alg)

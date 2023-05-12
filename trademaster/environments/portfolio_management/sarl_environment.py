@@ -90,8 +90,12 @@ class PortfolioManagementSARLEnvironment(Environments):
         X = torch.cat(X, dim=0).to(self.device)
         # X = X.unsqueeze(0).cuda() DBG
         X = X.unsqueeze(0)
+        print(X.shape)
         y = self.net(X)
         y = y.cpu().detach().squeeze().numpy()
+        print(y)
+        print(self.tech_indicator_list)
+        print(s_market)
         y = y.tolist()
         self.state = np.array(s_market + y)
         self.terminal = False
@@ -142,6 +146,7 @@ class PortfolioManagementSARLEnvironment(Environments):
         # make judgement about whether our data is running out
         self.terminal = self.day >= len(self.df.index.unique()) - 1
         actions = np.array(actions)
+        print(next(self.net.parameters()).device)
 
         if self.terminal:
             if self.task.startswith("test_dynamic"):
