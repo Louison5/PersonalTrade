@@ -49,7 +49,7 @@ def main():
         os.makedirs(work_dir)
     cfg.dump(osp.join(work_dir, osp.basename(args.config)))
 
-    trainer = build_trainer(cfg, default_args=dict(dataset=dataset, device = device))
+    trainer = build_trainer(cfg, default_args=dict(dataset=dataset))
 
     if task_name.startswith("train"):
         trainer.train_and_valid()

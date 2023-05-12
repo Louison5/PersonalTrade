@@ -20,11 +20,14 @@ import os.path as osp
 class PortfolioManagementSARLEnvironment(Environments):
     def __init__(self, config):
         super(PortfolioManagementSARLEnvironment, self).__init__()
+        print(config)
         self.dataset = get_attr(config, "dataset", None)
         self.task = get_attr(config, "task", "train")
         self.test_dynamic=int(get_attr(config, "test_dynamic", "-1"))
         self.task_index = int(get_attr(config, "task_index", "-1"))
         self.work_dir = get_attr(config, "work_dir", "")
+        self.device = get_attr(config, "device", "") # DBG device
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         length_day = get_attr(self.dataset, "length_day", 10)
         self.day = length_day
         self.df_path = None
@@ -55,8 +58,8 @@ class PortfolioManagementSARLEnvironment(Environments):
         ##############################################################
         from trademaster.nets import mLSTMClf
         # self.network_dict = torch.load(get_attr(pretrained, "sarl_encoder", None))
-        self.net = mLSTMClf(n_features = len(self.tech_indicator_list), layer_num = 1, n_hidden = 128, tic_number = len(self.tic_list))
-        # self.net = mLSTMClf(n_features = len(self.tech_indicator_list), layer_num = 1, n_hidden = 128, tic_number = len(self.tic_list)).cuda()
+        self.net = mLSTMClf(n_features = len(self.tech_indicator_list), layer_num = 1, n_hidden = 128, tic_number = len(self.tic_list)).to(self.device)
+        # self.net = mLSTMClf(n_features = len(self.tech_indicator_list), layer_num = 1, n_hidden = 128, tic_number = len(self.tic_list)).cuda() DBG
         # self.net.load_state_dict(self.network_dict)
         ##############################################################
 
@@ -84,8 +87,9 @@ class PortfolioManagementSARLEnvironment(Environments):
             df_information = torch.from_numpy(
                 df_information).float().unsqueeze(0)
             X.append(df_information)
-        X = torch.cat(X, dim=0)
-        X = X.unsqueeze(0).cuda()
+        X = torch.cat(X, dim=0).to(self.device)
+        # X = X.unsqueeze(0).cuda() DBG
+        X = X.unsqueeze(0)
         y = self.net(X)
         y = y.cpu().detach().squeeze().numpy()
         y = y.tolist()
@@ -118,8 +122,9 @@ class PortfolioManagementSARLEnvironment(Environments):
             df_information = torch.from_numpy(
                 df_information).float().unsqueeze(0)
             X.append(df_information)
-        X = torch.cat(X, dim=0)
-        X = X.unsqueeze(0).cuda()
+        X = torch.cat(X, dim=0).to(self.device)
+        # X = X.unsqueeze(0).cuda() DBG
+        X = X.unsqueeze(0)
         y = self.net(X)
         y = y.cpu().detach().squeeze().numpy().tolist()
         self.state = np.array(s_market + y)
@@ -202,8 +207,9 @@ class PortfolioManagementSARLEnvironment(Environments):
                 df_information = torch.from_numpy(
                     df_information).float().unsqueeze(0)
                 X.append(df_information)
-            X = torch.cat(X, dim=0)
-            X = X.unsqueeze(0).cuda()
+            X = torch.cat(X, dim=0).to(self.device)
+            # X = X.unsqueeze(0).cuda()  DBG
+            X = X.unsqueeze(0)
             y = self.net(X)
             y = y.cpu().detach().squeeze().numpy().tolist()
             self.state = np.array(s_market + y)
