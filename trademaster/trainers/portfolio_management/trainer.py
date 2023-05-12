@@ -70,7 +70,7 @@ class PortfolioManagementTrainer(Trainer):
 
         self.trainer_name = select_algorithms(self.agent_name)
         self.configs["env"] = "portfolio_management"
-        self.configs["env_config"] = dict(dataset=self.dataset, task="train")
+        self.configs["env_config"] = dict(dataset=self.dataset, task="train", device=self.device)
 
         self.init_before_training()
 
@@ -124,7 +124,7 @@ class PortfolioManagementTrainer(Trainer):
                     action)
                 episode_reward_sum += reward
                 if done:
-                    #print("Valid Episode Reward Sum: {:04f}".format(episode_reward_sum))
+                    print("Valid Episode Reward Sum: {:04f}".format(episode_reward_sum))
                     break
             valid_score_list.append(information["sharpe_ratio"])
 
