@@ -146,7 +146,8 @@ class PortfolioManagementSARLEnvironment(Environments):
         # make judgement about whether our data is running out
         self.terminal = self.day >= len(self.df.index.unique()) - 1
         actions = np.array(actions)
-        print(next(self.net.parameters()).device)
+        for p in self.net.parameters():
+            print(p.device)
 
         if self.terminal:
             if self.task.startswith("test_dynamic"):
