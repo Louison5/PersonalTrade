@@ -37,7 +37,7 @@ class PortfolioManagementEnvironment(Environments):
             self.df_path = get_attr(self.dataset, "test_path", None)
 
         self.initial_amount = get_attr(self.dataset, "initial_amount", 100000)
-        self.transaction_cost_pct = get_attr(self.dataset, "transaction_cost_pct", 0.001)
+        self.transaction_cost_pct = get_attr(self.dataset, "transaction_cost_pct", 0.01)
         self.tech_indicator_list = get_attr(self.dataset, "tech_indicator_list", [])
 
         if self.task.startswith("test_dynamic"):

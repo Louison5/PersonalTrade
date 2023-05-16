@@ -13,7 +13,6 @@ _base_ = [
     f"../_base_/trainers/{task_name}/deeptrader_trainer.py",
     f"../_base_/losses/{loss_name}.py",
     f"../_base_/optimizers/{optimizer_name}.py",
-    f"../_base_/nets/{net_name}.py",
 ]
 
 data = dict(
