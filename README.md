@@ -9,6 +9,8 @@
 
 #### please note that before you run the tutorials, do [setup the environment as per required by TradeMaster](#installation)
 
+#### The results in the [presentation slides](https://github.com/Louison5/PersonalTrade/blob/main/TutorialPre.pdf) can be reproduced here, by tweaking some config parameters.
+
 - [May16.ipynb](https://github.com/Louison5/PersonalTrade/blob/main/tutorial/May16.ipynb)
 
   - Explore the environment of portfolio management
