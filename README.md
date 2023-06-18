@@ -33,6 +33,11 @@
   - Personally define and customize models
   - Write your own model and test it out!
 
+- [Trials.py](https://github.com/Louison5/PersonalTrade/blob/main/tutorial/Trials.py)
+
+  - Tweaking of parameters to train
+  - Reproduce the results in the presentation
+
 # TradeMaster: An RL Platform for Trading
 
 <div align="center">
